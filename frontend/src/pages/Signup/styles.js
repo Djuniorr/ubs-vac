@@ -36,7 +36,7 @@ export const LabelSignin = styled.label`
   color: #676767;
 `;
 
-export const labelError = styled.label`
+export const LabelError = styled.label`
   font-size: 14px;
   color: red;
 `;
@@ -48,4 +48,21 @@ export const Strong = styled.strong`
     text-decoration: none;
     color: #676767;
   }
+`;
+
+export const PasswordWrapper = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+export const PasswordButton = styled.button`
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #4D4E50
 `;
