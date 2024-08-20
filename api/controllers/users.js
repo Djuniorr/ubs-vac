@@ -18,13 +18,7 @@ export const validateLogin = (req, res) => {
 };
 
 export const createLogin = (req, res) => {
-    const email = req.body.email
-    const confirmEmail = req.body.confirmEmail
     const password = req.body.password;
-
-    if (email !== confirmEmail) {
-        return res.status(400).json();
-    }
 
     const checkQuery = "SELECT * FROM usuarios WHERE email = ?";
     db.query(checkQuery,[email], (err, data) => {

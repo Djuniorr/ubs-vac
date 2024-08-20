@@ -32,7 +32,7 @@ const Signup = () => {
       return;
     }
 
-    const res = await signup(email, emailConf, senha);
+    const res = await signup(email, senha);
 
     if (res) {
       setError(res);

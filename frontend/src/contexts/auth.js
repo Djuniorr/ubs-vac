@@ -28,11 +28,10 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const signup = async (email, confirmEmail, password) => {
+    const signup = async (email, password) => {
         try {
             const response = await axios.post("http://localhost:8800/register", {
                 email: email,
-                confirmEmail: confirmEmail,
                 password: password,
             });
 
