@@ -45,7 +45,7 @@ const Signup = () => {
 
   return (
     <C.Container>
-      <C.Label>FAÇA SEU CADASTRO</C.Label>
+      <C.LabelWelcome>FAÇA SEU CADASTRO</C.LabelWelcome>
       <C.Content>
         <Input
           type="email"

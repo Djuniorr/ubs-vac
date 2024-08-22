@@ -6,3 +6,10 @@ export const db = mysql.createConnection({
     password: "123456",
     database: "login"
 })
+
+export const ubs_db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "123456",
+    database: "ubs"
+})

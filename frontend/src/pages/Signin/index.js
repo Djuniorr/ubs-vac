@@ -34,6 +34,7 @@ const Signin = () => {
   return (
     <C.Container>
       <C.Label>UBS VAC</C.Label>
+      <C.LabelWelcome>FAÇA O SEU LOGIN</C.LabelWelcome>
       <C.Content>
         <Input
           type="email"
@@ -47,7 +48,7 @@ const Signin = () => {
           value={senha}
           onChange={(e) => [setSenha(e.target.value), setError("")]}
         />
-        <C.labelError>{error}</C.labelError>
+        <C.LabelError>{error}</C.LabelError>
         <Button Text="Entrar" onClick={handleLogin} />
         <C.LabelSignup>
           Não tem uma conta?

@@ -35,20 +35,29 @@ export const Title = styled.label`
   padding: 10px;
 `;
 
-export const Subtitle = styled.label`
-  font-size: 26px;
+export const TitleUbs = styled.label`
+  font-size: 24px;
   font-weight: 700;
   color: #2B2B2E;
   padding-bottom: 40px;
   text-align: left;
   display: block;
-  margin-bottom: 20px;
   margin-top: 60px;
+  line-height: 1.6;
 `;
 
-export const Paragraph = styled.p`
-  font-size: 20px;
-  color: #2B2B2E;
-  line-height: 1.6;
-  margin-bottom: 80px;
+export const UbsItem = styled.div`
+  margin-bottom: 2px;
+  padding: 15px;
+  background-color: #f5f5f9;
+
+  p {
+    margin: 5px 0;
+  }
+`;
+
+export const UbsList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 `;

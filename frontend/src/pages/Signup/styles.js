@@ -18,7 +18,7 @@ export const Content = styled.div`
   width: 100%;
   box-shadow: 0 1px 2px #0003;
   background-color: white;
-  max-width: 350px;
+  max-width: 400px;
   padding: 20px;
   border-radius: 5px;
 `;
@@ -29,6 +29,13 @@ export const Label = styled.label`
   color: #FFFFFF;
   padding: 10px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+`;
+
+export const LabelWelcome = styled.label`
+  font-size: 18px;
+  font-weight: 600;
+  color: #2B2B2E;
+  padding: 10px;
 `;
 
 export const LabelSignin = styled.label`
@@ -46,7 +53,7 @@ export const Strong = styled.strong`
 
   a {
     text-decoration: none;
-    color: #676767;
+    color: #323235;
   }
 `;
 
@@ -64,5 +71,5 @@ export const PasswordButton = styled.button`
   border: none;
   cursor: pointer;
   font-size: 0.95rem;
-  color: #4D4E50
+  color: #323235
 `;
