@@ -6,6 +6,7 @@ export const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState();
     const [ubsList, setUbsList] = useState([]);
+    const [vacinasList, setVacinasList] = useState([]); 
 
     const signin = async (email, password) => {
         try {
@@ -64,9 +65,18 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
+    const getUbsWithVacinas = useCallback(async () => {
+        try {
+            const response = await axios.get("http://localhost:8800/ubsWithVacinas");
+            setVacinasList(response.data);
+        } catch (error) {
+            console.error("Erro ao buscar lista de UBSs com vacinas", error);
+        }
+    }, []);
+
     return (
         <AuthContext.Provider
-            value={{ user, signed: !!user, signin, signup, signout, getUbs, ubsList }}
+        value={{ user, signed: !!user, signin, signup, signout, getUbs, getUbsWithVacinas, ubsList, vacinasList }}
         >
             {children}
         </AuthContext.Provider>
