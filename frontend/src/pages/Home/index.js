@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import * as C from "./styles";
 
 const Home = () => {
-  const { signout, getUbs } = useAuth();
+  const { signout, getUbs, getUbsWithVacinas  } = useAuth();
   const navigate = useNavigate();
 
   return (
@@ -14,7 +14,7 @@ const Home = () => {
         <C.Title>UBS VAC</C.Title>
         <Button Text="Home" onClick={() => [getUbs(), navigate("/home")]} />
         <Button Text="Encontrar UBS" onClick={() => [getUbs(), navigate("/ubs")]} />
-        <Button Text="Vacinas" onClick={() => [signout(), navigate("/vacinas")]} />
+        <Button Text="Vacinas" onClick={() => [getUbsWithVacinas(), navigate("/vacinas")]} />
         <Button Text="Feedback" onClick={() => [signout(), navigate("/feedback")]} />
         <Button Text="Sair" onClick={() => [signout(), navigate("/")]} />
       </C.Menu>

@@ -5,11 +5,12 @@ import Home from "../pages/Home";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import Ubs from "../pages/Ubs";
+import Vacinas from "../pages/Vacinas"; 
 
 const Private = ({ Item }) => {
   const { signed } = useAuth();
 
-  return signed > 0 ? <Item /> : <Signin />;
+  return signed ? <Item /> : <Signin />;
 };
 
 const RoutesApp = () => {
@@ -17,10 +18,11 @@ const RoutesApp = () => {
     <BrowserRouter>
       <Fragment>
         <Routes>
-          <Route exact path="/home" element={<Private Item={Home} />} />
-          <Route exact path="/ubs" element={<Private Item={Ubs} />} />
+          <Route path="/home" element={<Private Item={Home} />} />
+          <Route path="/ubs" element={<Private Item={Ubs} />} />
+          <Route path="/vacinas" element={<Private Item={Vacinas} />} />
           <Route path="/" element={<Signin />} />
-          <Route exact path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<Signin />} />
         </Routes>
       </Fragment>
