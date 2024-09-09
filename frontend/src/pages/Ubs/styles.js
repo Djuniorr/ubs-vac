@@ -61,3 +61,20 @@ export const UbsList = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 `;
+
+export const BoxFilter = styled.div`
+  display: flex;
+  flexDirection: column;
+  width: full;
+  padding: 14px;
+`;
+
+export const CleaningBotton = styled.button`
+  margin-left: 14px;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #2B2B2E;
+  font-weight: bold;
+`;
