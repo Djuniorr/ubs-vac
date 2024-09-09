@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import * as C from "./styles";
 
 const Ubs = () => {
-  const { signout, getUbs, ubsList } = useAuth();
+  const { signout, getUbs, ubsList, getUbsWithVacinas } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const Ubs = () => {
         <C.Title>UBS VAC</C.Title>
         <Button Text="Home" onClick={() => [getUbs(), navigate("/home")]} />
         <Button Text="Encontrar UBS" onClick={() => [getUbs(), navigate("/home")]} />
-        <Button Text="Vacinas" onClick={() => [signout(), navigate("/vacinas")]} />
+        <Button Text="Vacinas" onClick={() => [getUbsWithVacinas(), navigate("/vacinas")]} />
         <Button Text="Feedback" onClick={() => [signout(), navigate("/feedback")]} />
         <Button Text="Sair" onClick={() => [signout(), navigate("/")]} />
       </C.Menu>

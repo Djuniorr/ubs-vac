@@ -6,7 +6,6 @@ export const validateLogin = (req, res) => {
 
     db.query(query, [email, password], (err, data) => {
         if (err) {
-            console.error("Erro ao consultar o banco de dados:", err);
             return res.status(500).json({ error: "Erro interno do servidor" });
         }
 
@@ -62,13 +61,10 @@ export const getUbsWithVacinas = (req, res) => {
             v.nome, u.nome;
     `;
 
-    // Executar a consulta
     ubs_db.query(query, (err, result) => {
         if (err) {
-            console.error("Erro ao consultar o banco de dados:", err);
             return res.status(500).json({ error: "Erro interno do servidor" });
         }
-        // Enviar os resultados da consulta como resposta
         return res.status(200).json(result);
     });
 };

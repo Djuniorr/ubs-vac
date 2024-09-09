@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-// Container principal da página
 export const Container = styled.div`
   display: flex;
   height: 100vh;
@@ -8,7 +7,6 @@ export const Container = styled.div`
   background-color: #f5f5f9;
 `;
 
-// Menu lateral
 export const Menu = styled.div`
   gap: 15px;
   display: flex;
@@ -24,14 +22,12 @@ export const Menu = styled.div`
   border-radius: 2px;
 `;
 
-// Conteúdo principal da página
 export const MainContent = styled.div`
   flex: 1;
-  padding: 40px;  // Ajustado para um padding mais equilibrado
+  padding: 40px;
   overflow-y: auto;
 `;
 
-// Título principal da página
 export const Title = styled.label`
   font-size: 18px;
   font-weight: 600;
@@ -39,23 +35,21 @@ export const Title = styled.label`
   padding: 10px;
 `;
 
-// Título específico para a lista de vacinas
 export const TitleVacinas = styled.label`
   font-size: 24px;
   font-weight: 700;
   color: #2B2B2E;
-  padding-bottom: 20px; // Ajustado para um espaçamento mais moderado
+  padding-bottom: 20px;
   text-align: left;
   display: block;
-  margin-top: 40px; // Ajustado para um espaçamento mais equilibrado
+  margin-top: 40px;
   line-height: 1.6;
 `;
 
-// Item da lista de vacinas
 export const VacinaItem = styled.div`
-  margin-bottom: 20px; // Ajustado para um espaçamento mais visível
-  padding: 15px;
-  background-color: #ffffff; // Ajustado para destacar o item
+  margin-bottom: 20px;
+  padding: 15px 30px;
+  background-color: #ffffff;
   border-radius: 4px;
   box-shadow: 0 1px 2px #0003;
   
@@ -64,9 +58,8 @@ export const VacinaItem = styled.div`
   }
 `;
 
-// Lista de vacinas
 export const VacinasList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px; // Ajustado para um espaçamento mais uniforme
+  gap: 15px;
 `;

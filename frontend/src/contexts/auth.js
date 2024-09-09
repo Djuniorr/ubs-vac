@@ -61,7 +61,9 @@ export const AuthProvider = ({ children }) => {
             const response = await axios.get("http://localhost:8800/ubs");
             setUbsList(response.data);
         } catch (error) {
-            console.error("Erro ao buscar lista de UBSs", error);
+            if (error.response) {
+                return "Erro ao buscar lista de UBSs";
+            }
         }
     }, []);
 
@@ -70,7 +72,9 @@ export const AuthProvider = ({ children }) => {
             const response = await axios.get("http://localhost:8800/ubsWithVacinas");
             setVacinasList(response.data);
         } catch (error) {
-            console.error("Erro ao buscar lista de UBSs com vacinas", error);
+            if (error.response) {
+                return "Erro ao buscar lista de UBSs com vacinas"
+            }
         }
     }, []);
 

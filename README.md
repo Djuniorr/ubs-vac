@@ -24,10 +24,11 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - React
 - Javascript
 - Html e Css
+- Banco de Dados MySQL
 
 
 ## 💻 Projeto
 
-O Projeto tem como intuito mostrar as informações das ubs na cidade de Caxias do Sul, tais como vacinas, horário de atendimento e sua localização....
+O Projeto tem como intuito mostrar as informações das UBS na cidade de Caxias do Sul, tais como vacinas, horário de atendimento, localização, contato e lista de vacinas disponíveis.
 
 
