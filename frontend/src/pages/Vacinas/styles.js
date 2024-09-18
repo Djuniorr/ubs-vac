@@ -1,3 +1,4 @@
+// src/pages/Vacinas/styles.js
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -62,4 +63,20 @@ export const VacinasList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+`;
+
+export const BoxFilter = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+export const CleaningButton = styled.button`
+  margin-left: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #2B2B2E;
+  font-weight: bold;
 `;
