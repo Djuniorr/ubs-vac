@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import useAuth from "../../hooks/useAuth";
 import * as C from "./styles";
+import Input from "../../components/Input";
 
 const Vacinas = () => {
   const { signout, getUbsWithVacinas, vacinasList } = useAuth();
   const navigate = useNavigate();
 
-  // Use local state to manage vacinasList
+  
   const [vacinasData, setVacinasData] = useState([]);
-
+  const [searchTerm, setSearchTerm] = useState("");
+  
   useEffect(() => {
     const fetchData = async () => {
       await getUbsWithVacinas();
@@ -20,12 +22,19 @@ const Vacinas = () => {
     fetchData();
   }, [getUbsWithVacinas, vacinasList]);
 
-  // Organize vacinas by their names
-  const vacinasByName = vacinasData.reduce((acc, vac) => {
+  const filteredVacinas = vacinasData.filter((vac) =>
+    vac.vacina.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const vacinasByName = filteredVacinas.reduce((acc, vac) => {
     acc[vac.vacina] = acc[vac.vacina] || [];
     acc[vac.vacina].push(vac.ubs);
     return acc;
   }, {});
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   return (
     <C.Container>
@@ -39,6 +48,17 @@ const Vacinas = () => {
       </C.Menu>
       <C.MainContent>
         <C.TitleVacinas>Lista de Vacinas Disponíveis</C.TitleVacinas>
+        <C.BoxFilter>
+          <Input
+            type="text"
+            placeholder="Digite o nome da vacina"
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+          {searchTerm && (
+            <C.CleaningButton onClick={() => setSearchTerm('')}>x</C.CleaningButton>
+          )}
+        </C.BoxFilter>
         <C.VacinasList>
           {Object.entries(vacinasByName).map(([vacina, ubs]) => (
             <C.VacinaItem key={vacina}>
