@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
     const signin = async (email, password) => {
         try {
-            const response = await axios.post("http://localhost:8800/login", {
+            const response = await axios.post("API_HOST/login", {
                 email: email,
                 password: password,
             });
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
     const signup = async (email, password) => {
         try {
-            const response = await axios.post("http://localhost:8800/register", {
+            const response = await axios.post("API_HOST/register", {
                 email: email,
                 password: password,
             });
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
 
     const getUbs = useCallback(async () => {
         try {
-            const response = await axios.get("http://localhost:8800/ubs");
+            const response = await axios.get("API_HOST/ubs");
             setUbsList(response.data);
         } catch (error) {
             if (error.response) {
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
 
     const getUbsWithVacinas = useCallback(async () => {
         try {
-            const response = await axios.get("http://localhost:8800/ubsWithVacinas");
+            const response = await axios.get("API_HOST/ubsWithVacinas");
             setVacinasList(response.data);
         } catch (error) {
             if (error.response) {
