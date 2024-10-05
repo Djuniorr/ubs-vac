@@ -11,7 +11,7 @@ services:
     depends_on:
       - backend
     environment:
-      - API_HOST=http://ubs-vac_backend_1:8800  # Alterado para nome correto do backend
+      - API_HOST=http://localhost:8800  # Alterado para nome correto do backend
     networks:
       - app-network
 
