@@ -11,7 +11,7 @@ services:
     depends_on:
       - backend
     environment:
-      - API_HOST=http://18.221.211.187:8800
+      - API_HOST=http://ubs-vac_backend_1:8800
     networks:
       - app-network
 
