@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
     const signin = async (email, password) => {
         try {
-            const response = await axios.post(`${process.env.API_HOST}/login`, {  // Usando variável de ambiente
+            const response = await axios.post("API_HOST/login", {  // Usando variável de ambiente
                 email: email,
                 password: password,
             });
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
     const signup = async (email, password) => {
         try {
-            const response = await axios.post(`${process.env.API_HOST}/register`, {  // Usando variável de ambiente
+            const response = await axios.post("API_HOST/register", {  // Usando variável de ambiente
                 email: email,
                 password: password,
             });
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
 
     const getUbs = useCallback(async () => {
         try {
-            const response = await axios.get(`${process.env.API_HOST}/ubs`);  // Usando variável de ambiente
+            const response = await axios.get("API_HOST/ubs");  // Usando variável de ambiente
             setUbsList(response.data);
         } catch (error) {
             if (error.response) {
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
 
     const getUbsWithVacinas = useCallback(async () => {
         try {
-            const response = await axios.get(`${process.env.API_HOST}/ubsWithVacinas`);  // Usando variável de ambiente
+            const response = await axios.get("API_HOST/ubsWithVacinas");  // Usando variável de ambiente
             setVacinasList(response.data);
         } catch (error) {
             if (error.response) {
