@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
     const signin = async (email, password) => {
         try {
-            const response = await axios.post(":8080/login", {  // Usando variável de ambiente
+            const response = await axios.post("http://18.221.211.187:8080/login", {  // Usando variável de ambiente
                 email: email,
                 password: password,
             });
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
     const signup = async (email, password) => {
         try {
-            const response = await axios.post(":8080/register", {  // Usando variável de ambiente
+            const response = await axios.post("http://18.221.211.187:8080/register", {  // Usando variável de ambiente
                 email: email,
                 password: password,
             });
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
 
     const getUbs = useCallback(async () => {
         try {
-            const response = await axios.get(":8080/ubs");  // Usando variável de ambiente
+            const response = await axios.get("http://18.221.211.187:8080/ubs");  // Usando variável de ambiente
             setUbsList(response.data);
         } catch (error) {
             if (error.response) {
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
 
     const getUbsWithVacinas = useCallback(async () => {
         try {
-            const response = await axios.get(":8080/ubsWithVacinas");  // Usando variável de ambiente
+            const response = await axios.get("http://18.221.211.187:8080/ubsWithVacinas");  // Usando variável de ambiente
             setVacinasList(response.data);
         } catch (error) {
             if (error.response) {
