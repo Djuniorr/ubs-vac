@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
     const signin = async (email, password) => {
         try {
-            const response = await axios.post("API_HOST/login", {
+            const response = await axios.post(`${process.env.API_HOST}/login`, {  // Usando variável de ambiente
                 email: email,
                 password: password,
             });
@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
                 return;
             }
 
-            return 'Usuário ou senha incorretos'
+            return 'Usuário ou senha incorretos';
         } catch (error) {
             if (error.response && error.response.status === 404) {
                 return "E-mail ou senha incorretos";
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
     const signup = async (email, password) => {
         try {
-            const response = await axios.post("API_HOST/register", {
+            const response = await axios.post(`${process.env.API_HOST}/register`, {  // Usando variável de ambiente
                 email: email,
                 password: password,
             });
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
                 return;
             }
 
-            return 'Erro ao criar conta, tente mais tarde'
+            return 'Erro ao criar conta, tente mais tarde';
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 return "Conta já existente";
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
 
     const getUbs = useCallback(async () => {
         try {
-            const response = await axios.get("API_HOST/ubs");
+            const response = await axios.get(`${process.env.API_HOST}/ubs`);  // Usando variável de ambiente
             setUbsList(response.data);
         } catch (error) {
             if (error.response) {
@@ -69,18 +69,18 @@ export const AuthProvider = ({ children }) => {
 
     const getUbsWithVacinas = useCallback(async () => {
         try {
-            const response = await axios.get("API_HOST/ubsWithVacinas");
+            const response = await axios.get(`${process.env.API_HOST}/ubsWithVacinas`);  // Usando variável de ambiente
             setVacinasList(response.data);
         } catch (error) {
             if (error.response) {
-                return "Erro ao buscar lista de UBSs com vacinas"
+                return "Erro ao buscar lista de UBSs com vacinas";
             }
         }
     }, []);
 
     return (
         <AuthContext.Provider
-        value={{ user, signed: !!user, signin, signup, signout, getUbs, getUbsWithVacinas, ubsList, vacinasList }}
+            value={{ user, signed: !!user, signin, signup, signout, getUbs, getUbsWithVacinas, ubsList, vacinasList }}
         >
             {children}
         </AuthContext.Provider>
