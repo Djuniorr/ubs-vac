@@ -11,7 +11,7 @@ services:
     depends_on:
       - backend
     environment:
-      - API_HOST=http://localhost:8800  # Alterado para nome correto do backend
+      - REACT_APP_API_HOST=http://localhost:8800  # Alterado para nome correto do backend
     networks:
       - app-network
 
