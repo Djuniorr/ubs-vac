@@ -4,38 +4,75 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  gap: 10px;
   height: 100vh;
+  width: 100vw;
 `;
 
-export const Content = styled.div`
+export const ContentPrimario = styled.div`
+  gap: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;  
+  border-radius: 15px;
+  max-width: 90%;
+  max-height: 90%;
+
+  @media (min-width: 500px){
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 10px;
+    background-color: #ced7eb;
+    padding: 40px;
+  }
+
+  @media (min-width: 980px){
+    flex-direction: row;
+  }
+`;
+
+export const ContentCabecalho = styled.div`
+gap: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+width: 100%;
+`;
+
+export const ContentDados = styled.div`
   gap: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  box-shadow: 0 1px 2px #0003;
-  background-color: white;
-  max-width: 400px;
-  padding: 20px;
-  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px 5px;  
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
+
+  @media (min-width: 980px){
+    width: 650px;
+  }
 `;
 
 export const Label = styled.label`
-  font-size: 26px;
+  font-size: 50px;  
+  color: white;
   font-weight: 600;
-  color: #FFFFFF;
-  padding: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+
+  @media (min-width: 500px){
+    color: #657997;
+  }
 `;
 
-export const LabelWelcome = styled.label`
-  font-size: 18px;
+export const LabelWelcome = styled.label`  
+  color: white;
+  font-size: 14px;
   font-weight: 600;
-  color: #2B2B2E;
-  padding: 10px;
+
+  @media (min-width: 500px){
+    color: #657997;
+  }
 `;
 
 export const LabelSignup = styled.label`

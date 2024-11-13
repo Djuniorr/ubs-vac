@@ -7,9 +7,13 @@ export const Button = styled.button`
   border-radius: 5px;
   width: 100%;
   cursor: pointer;
-  background-color: #046ee5;
+  background-color: #657997;
   color: white;
   font-weight: 600;
   font-size: 16px;
   max-width: 350px;
+
+  &:hover{
+    background-color: #546175;
+  }
 `;

@@ -23,7 +23,7 @@ const Signin = () => {
 
     if (res) {
       console.log(res);
-      
+
       setError(res);
       return;
     }
@@ -33,30 +33,35 @@ const Signin = () => {
 
   return (
     <C.Container>
-      <C.Label>UBS VAC</C.Label>
-      <C.LabelWelcome>FAÇA O SEU LOGIN</C.LabelWelcome>
-      <C.Content>
-        <Input
-          type="email"
-          placeholder="Digite seu E-mail"
-          value={email}
-          onChange={(e) => [setEmail(e.target.value), setError("")]}
-        />
-        <Input
-          type="password"
-          placeholder="Digite sua Senha"
-          value={senha}
-          onChange={(e) => [setSenha(e.target.value), setError("")]}
-        />
-        <C.LabelError>{error}</C.LabelError>
-        <Button Text="Entrar" onClick={handleLogin} />
-        <C.LabelSignup>
-          Não tem uma conta?
-          <C.Strong>
-            <Link to="/signup">&nbsp;Inscreva-se</Link>
-          </C.Strong>
-        </C.LabelSignup>
-      </C.Content>
+      <C.ContentPrimario>
+        <C.ContentCabecalho>
+          <C.Label>UBS VAC</C.Label>
+          <C.LabelWelcome>Insira Suas Informações Para Entrar</C.LabelWelcome>
+        </C.ContentCabecalho>
+
+        <C.ContentDados>
+          <Input
+            type="email"
+            placeholder="Digite seu E-mail"
+            value={email}
+            onChange={(e) => [setEmail(e.target.value), setError("")]}
+          />
+          <Input
+            type="password"
+            placeholder="Digite sua Senha"
+            value={senha}
+            onChange={(e) => [setSenha(e.target.value), setError("")]}
+          />
+          <C.LabelError>{error}</C.LabelError>
+          <Button Text="Entrar" onClick={handleLogin} />
+          <C.LabelSignup>
+            Não tem uma conta?
+            <C.Strong>
+              <Link to="/signup">&nbsp;Inscreva-se</Link>
+            </C.Strong>
+          </C.LabelSignup>
+        </C.ContentDados>
+      </C.ContentPrimario>
     </C.Container>
   );
 };

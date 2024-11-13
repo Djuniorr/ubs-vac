@@ -2,53 +2,74 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  flex-direction: column;    
+  background-color: #FFF;
   height: 100vh;
-  gap: 30px;
-  background-color: #f5f5f9;
 `;
 
 export const Menu = styled.div`
-  gap: 15px;
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
+  background-color: #657997;
+  grid-template-columns: repeat(6, 1fr);
+  height: 50px;
+`;
+
+export const ContentMenu = styled.div`
   width: 100%;
-  height: 100vh;
-  box-shadow: 0 1px 2px #0003;
-  background-color: #f0f0f0;
-  max-width: 400px;
-  padding: 20px;
-  border-radius: 2px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #FFF;
+  background: #657997;
+  font-size: 16px;
+  border-right: 1px solid #FFF;
+  text-transform: uppercase;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  button{
+    padding: 0;
+    border-radius: unset;
+    font-size: unset;
+    max-width: unset;
+    font-weight: unset;
+    height: 100%;
+  }
+`;
+
+export const MainContainer = styled.div`  
+  padding: 10px;
+  background: #eceff4;
+  height: 100%;
 `;
 
 export const MainContent = styled.div`
-  flex: 1;
-  padding: 100px;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;  
 `;
 
-export const Title = styled.label`
-  font-size: 18px;
-  font-weight: 600;
-  color: #2B2B2E;
-  padding: 10px;
+export const ContainerDiv = styled.div`
+  background: #FFF;
+  border-radius: 6px;
+  padding: 25px;
+
+  > div:nth-child(1) {
+    font-size: 25px;
+    font-weight: bold;
+  }
+  
+  > div:nth-child(2) {
+    font-size: 18px;
+    text-align: justify;
+  }
 `;
 
-export const Subtitle = styled.label`
-  font-size: 26px;
-  font-weight: 700;
-  color: #2B2B2E;
-  padding-bottom: 40px;
-  text-align: left;
-  display: block;
-  margin-bottom: 20px;
-  margin-top: 60px;
-`;
-
-export const Paragraph = styled.p`
-  font-size: 20px;
-  color: #2B2B2E;
-  line-height: 1.6;
-  margin-bottom: 80px;
-`;
+export const ContentDiv = styled.div`
+  
+`
