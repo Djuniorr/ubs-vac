@@ -1,22 +1,18 @@
 version: '3.8'
-
 services:
   frontend:
-    container_name: ubs-vac_frontend_1  # Renomeado para frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "80:80"  # Expondo a porta 80
+      - "80:80"
     depends_on:
       - backend
     environment:
-      - REACT_APP_API_HOST=http://localhost:8800  # Alterado para nome correto do backend
+      - API_HOST=http://localhost:8800
     networks:
       - app-network
-
   backend:
-    container_name: ubs-vac_backend_1  # Renomeado para backend
     build:
       context: ./api
       dockerfile: Dockerfile
@@ -25,30 +21,27 @@ services:
       - DB_USER=root
       - DB_PASSWORD=123456
       - DB_NAME=faculdade
-      - DB_NAME_LOGIN=login
-      - DB_NAME_UBS=ubs
+      - DB_NAME_LOGIN=login  # Nome do banco de dados 'login'
+      - DB_NAME_UBS=ubs      # Nome do banco de dados 'ubs'
     ports:
-      - "8800:8800"  # Expondo a porta 8800
+      - "8800:8800"
     depends_on:
       - db
     networks:
       - app-network
-
   db:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: faculdade
+      MYSQL_DATABASE: faculdade  # Definir o nome do banco de dados inicial aqui
     ports:
-      - "3306:3306"  # Usando a porta padrão do MySQL
+      - "5070:5070"
     volumes:
       - db_data:/var/lib/mysql
-      - ./script.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./script.sql:/docker-entrypoint-initdb.d/init.sql  # Adicione o caminho para o script.sql
     networks:
       - app-network
-
 volumes:
   db_data:
-
 networks:
   app-network:

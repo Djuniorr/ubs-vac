@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
     const signin = async (email, password) => {
         try {
-            const response = await axios.post("REACT_APP_API_HOST/login", {
+            const response = await axios.post("http://localhost:8800/login", {
                 email: email,
                 password: password,
             });
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
     const signup = async (email, password) => {
         try {
-            const response = await axios.post("REACT_APP_API_HOST/register", {
+            const response = await axios.post("http://localhost:8800/register", {
                 email: email,
                 password: password,
             });
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
 
     const getUbs = useCallback(async () => {
         try {
-            const response = await axios.get("REACT_APP_API_HOST/ubs");
+            const response = await axios.get("http://localhost:8800/ubs");
             setUbsList(response.data);
         } catch (error) {
             if (error.response) {
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
 
     const getUbsWithVacinas = useCallback(async () => {
         try {
-            const response = await axios.get("REACT_APP_API_HOST/ubsWithVacinas");
+            const response = await axios.get("http://localhost:8800/ubsWithVacinas");
             setVacinasList(response.data);
         } catch (error) {
             if (error.response) {
