@@ -1,4 +1,4 @@
-version: '3.8'
+# version: '3.8'
 services:
   frontend:
     build:
@@ -35,10 +35,10 @@ services:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: faculdade  # Definir o nome do banco de dados inicial aqui
     ports:
-      - "5070:5070"
+      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-      - ./script.sql:/docker-entrypoint-initdb.d/init.sql  # Adicione o caminho para o script.sql
+      - ./script.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
 volumes:
