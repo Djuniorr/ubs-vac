@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import useAuth from "../../hooks/useAuth";
 import * as C from "./styles";
 
 const Home = () => {
-  const { signout, getUbs, getUbsWithVacinas } = useAuth();
+  const { signout, getUbs, getUbsWithVacinas, ubsList, setUserLocation, userLocation } = useAuth();
   const navigate = useNavigate();
+
+  const [nome, setNome] = useState(""); 
+  const [filteredUbs, setFilteredUbs] = useState([]); 
+
+  const getUserLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          console.log("Localização obtida:", latitude, longitude);
+          setUserLocation({ latitude, longitude }); 
+        },
+        (error) => {
+          console.error("Erro ao obter localização:", error);
+          alert("Para usar esta funcionalidade, precisamos da sua permissão para acessar a localização.");
+        }
+      );
+    } else {
+      console.error("A geolocalização não é suportada por este navegador.");
+      alert("A geolocalização não é suportada por este navegador.");
+    }
+  };
+
+  useEffect(() => {
+    getUserLocation();
+  }, []);
 
   return (
     <C.Container>

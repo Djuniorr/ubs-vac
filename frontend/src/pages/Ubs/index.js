@@ -1,26 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth"; 
 import * as C from "./styles";
 import Input from "../../components/Input";
 
 const Ubs = () => {
-  const { signout, getUbs, ubsList, getUbsWithVacinas } = useAuth();
+  const { signout, getUbs, ubsList, userLocation, getUbsWithVacinas } = useAuth(); 
   const [nome, setNome] = useState("");
+  const [filteredUbs, setFilteredUbs] = useState([]); 
   const navigate = useNavigate();
+
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * (Math.PI / 180);
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * (Math.PI / 180)) *
+        Math.cos(lat2 * (Math.PI / 180)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  };
 
   const clearInput = () => {
     setNome('');
-  }
-  console.log(nome);
+  };
 
   useEffect(() => {
     getUbs();
   }, [getUbs]);
 
-  const list = ubsList.filter((ubs) => ubs.nome.toLowerCase().includes(nome.toLowerCase()));
-
+  const filteredList = ubsList.filter((ubs) => ubs.nome.toLowerCase().includes(nome.toLowerCase()));
+  
+  const sortedUbs = filteredList
+    .map((ubs) => {
+      const lat1 = userLocation.latitude.latitude;
+      const lon1 = userLocation.latitude.longitude;
+      const lat2 = parseFloat(ubs.latitude.trim());
+      const lon2 = parseFloat(ubs.longitude.trim());
+      const distance = calculateDistance(lat1, lon1, lat2, lon2);
+      return { ...ubs, distance };
+    })
+    .sort((a, b) => a.distance - b.distance); 
   return (
     <C.Container>
       <C.Menu>
@@ -31,7 +54,7 @@ const Ubs = () => {
           <Button Text="Home" onClick={() => [getUbs(), navigate("/home")]} />
         </C.ContentMenu>
         <C.ContentMenu>
-          <Button Text="Encontrar UBS" onClick={() => [getUbs(), navigate("/ubs")]} />
+        <Button Text="Encontrar UBS" onClick={() => [getUbs(), navigate("/ubs")]} />
         </C.ContentMenu>
         <C.ContentMenu>
           <Button Text="Vacinas" onClick={() => [getUbsWithVacinas(), navigate("/vacinas")]} />
@@ -60,14 +83,17 @@ const Ubs = () => {
             )}
           </C.BoxFilter>
           <C.UbsList>
-            {list.map((ubs) => (
-              <C.UbsItem key={ubs.id}>
-                <p><b>UBS {ubs.nome}</b></p>
-                <p><b>Endereço:</b> {ubs.endereco}</p>
-                <p><b>Horário:</b> De segunda à sexta das {ubs.horario_atendimento}.</p>
-                <p><b>Telefone:</b> {ubs.telefone}</p>
-              </C.UbsItem>
-            ))}
+            {sortedUbs.map((ubs) => {
+              return (
+                <C.UbsItem key={ubs.id}>
+                  <p><b>UBS decodeText({ubs.nome})</b></p>
+                  <p><b>Endereço:</b> decodeText({ubs.endereco})</p>
+                  <p><b>Horário:</b> De segunda à sexta das decodeText({ubs.horario_atendimento}).</p>
+                  <p><b>Telefone:</b> {ubs.telefone}</p>
+                  <p><b>Distância:</b> {ubs.distance.toFixed(2)} km</p>
+                </C.UbsItem>
+              );
+            })}
           </C.UbsList>
         </C.MainContent>
       </C.MainContainer>

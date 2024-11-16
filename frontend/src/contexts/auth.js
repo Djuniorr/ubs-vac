@@ -6,7 +6,12 @@ export const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState();
     const [ubsList, setUbsList] = useState([]);
-    const [vacinasList, setVacinasList] = useState([]); 
+    const [vacinasList, setVacinasList] = useState([]);
+    const [userLocation, setUserLocation] = useState({ latitude: null, longitude: null });
+
+    const updateUserLocation = (latitude, longitude) => {
+        setUserLocation({ latitude, longitude });
+    };
 
     const signin = async (email, password) => {
         try {
@@ -80,7 +85,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider
-        value={{ user, signed: !!user, signin, signup, signout, getUbs, getUbsWithVacinas, ubsList, vacinasList }}
+        value={{ user, signed: !!user, signin, signup, signout, getUbs, getUbsWithVacinas, ubsList, vacinasList,  userLocation, setUserLocation: updateUserLocation   }}
         >
             {children}
         </AuthContext.Provider>
