@@ -41,9 +41,10 @@ export const getUbs = (req, res) => {
     const query = "SELECT * FROM ubs";
     ubs_db.query(query, (err, result) => {
         if (err) return res.status(500).json();
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        console.log(result)
         return res.status(200).json(result);
     })
-
 }
 
 export const getUbsWithVacinas = (req, res) => {

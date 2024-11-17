@@ -86,9 +86,9 @@ const Ubs = () => {
             {sortedUbs.map((ubs) => {
               return (
                 <C.UbsItem key={ubs.id}>
-                  <p><b>UBS decodeText({ubs.nome})</b></p>
-                  <p><b>Endereço:</b> decodeText({ubs.endereco})</p>
-                  <p><b>Horário:</b> De segunda à sexta das decodeText({ubs.horario_atendimento}).</p>
+                  <p><b>UBS {ubs.nome}</b></p>
+                  <p><b>Endereço:</b> {ubs.endereco}</p>
+                  <p><b>Horário:</b> De segunda à sexta das {ubs.horario_atendimento}.</p>
                   <p><b>Telefone:</b> {ubs.telefone}</p>
                   <p><b>Distância:</b> {ubs.distance.toFixed(2)} km</p>
                 </C.UbsItem>

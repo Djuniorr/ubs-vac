@@ -1,5 +1,18 @@
 # Utilizando a imagem oficial do Node.js
-FROM node:16 AS build
+FROM node:20 AS build
+
+# Definir o ambiente para evitar interação no debconf
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Atualizar pacotes e instalar os pacotes de locale
+RUN apt-get update && apt-get install -y locales locales-all
+
+# Gerar o locale necessário
+RUN locale-gen en_US.UTF-8
+
+# Configurar o locale diretamente com as variáveis de ambiente
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
 
 # Definir o diretório de trabalho no container
 WORKDIR /app
