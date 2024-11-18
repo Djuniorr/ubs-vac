@@ -26,6 +26,10 @@ RUN npm install
 # Copiar o código da aplicação
 COPY . .
 
+# Copiar o script de espera para o banco de dados
+COPY wait-for-db.sh /usr/local/bin/wait-for-db.sh
+RUN chmod +x /usr/local/bin/wait-for-db.sh
+
 # Expor a porta 8800 (ou qualquer outra porta que seu servidor utilize)
 EXPOSE 8800
 

@@ -1,93 +1,113 @@
-import { createContext, useState, useCallback } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
+import * as C from "./styles";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export const AuthContext = createContext({});
+const Signup = () => {
+  const [email, setEmail] = useState("");
+  const [emailConf, setEmailConf] = useState("");
+  const [senha, setSenha] = useState("");
+  const [visualizarSenha, setVisualizarSenha] = useState(false);
+  const [senhaConf, setSenhaConf] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState();
-    const [ubsList, setUbsList] = useState([]);
-    const [vacinasList, setVacinasList] = useState([]);
-    const [userLocation, setUserLocation] = useState({ latitude: null, longitude: null });
+  const { signup } = useAuth();
 
-    const updateUserLocation = (latitude, longitude) => {
-        setUserLocation({ latitude, longitude });
-    };
+  const passwordVisibility = () => {
+    setVisualizarSenha(!visualizarSenha);
+  };
 
-    const signin = async (email, password) => {
-        try {
-            const response = await axios.post("http://localhost:8800/login", {
-                email: email,
-                password: password,
-            });
-
-            if (response.status === 200) {
-                setUser({ email });
-                return;
-            }
-
-            return 'Usuário ou senha incorretos'
-        } catch (error) {
-            if (error.response && error.response.status === 404) {
-                return "E-mail ou senha incorretos";
-            } else {
-                return "Ocorreu um erro inesperado";
-            }
-        }
-    };
-
-    const signup = async (email, password) => {
-        try {
-            const response = await axios.post("http://localhost:8800/register", {
-                email: email,
-                password: password,
-            });
-
-            if (response.status === 201) {
-                setUser({ email });
-                return;
-            }
-
-            return 'Erro ao criar conta, tente mais tarde'
-        } catch (error) {
-            if (error.response && error.response.status === 400) {
-                return "Conta já existente";
-            } else {
-                return "Ocorreu um erro inesperado";
-            }
-        }
-    };
-
-    const signout = async () => {
-        setUser(null);
+  const handleSignup = async () => {
+    if (!email | !emailConf | !senha | !senhaConf) {
+      setError("Preencha todos os campos");
+      return;
+    } else if (email !== emailConf || senha !== senhaConf) {
+      setError("Os campos não são iguais");
+      return;
     }
 
-    const getUbs = useCallback(async () => {
-        try {
-            const response = await axios.get("http://localhost:8800/ubs");
-            setUbsList(response.data);
-        } catch (error) {
-            if (error.response) {
-                return "Erro ao buscar lista de UBSs";
-            }
-        }
-    }, []);
+    const res = await signup(email, senha);
 
-    const getUbsWithVacinas = useCallback(async () => {
-        try {
-            const response = await axios.get("http://localhost:8800/ubsWithVacinas");
-            setVacinasList(response.data);
-        } catch (error) {
-            if (error.response) {
-                return "Erro ao buscar lista de UBSs com vacinas"
-            }
-        }
-    }, []);
+    if (res) {
+      setError(res);
+      return;
+    }
 
-    return (
-        <AuthContext.Provider
-        value={{ user, signed: !!user, signin, signup, signout, getUbs, getUbsWithVacinas, ubsList, vacinasList,  userLocation, setUserLocation: updateUserLocation   }}
-        >
-            {children}
-        </AuthContext.Provider>
-    );
+    toast.success("Usuário cadastrado com sucesso!");
+    navigate("/");
+  };
+
+  return (
+    <C.Container>
+      <C.LabelWelcome>FAÇA SEU CADASTRO</C.LabelWelcome>
+      <C.MainContent>
+        <C.Content>
+          <C.DivMain>
+            <Input
+              type="email"
+              placeholder="Digite seu E-mail"
+              value={email}
+              onChange={(e) => [setEmail(e.target.value), setError("")]}
+            />
+          </C.DivMain>
+          <C.DivMain>
+            <Input
+              type="email"
+              placeholder="Confirme seu E-mail"
+              value={emailConf}
+              onChange={(e) => [setEmailConf(e.target.value), setError("")]}
+            />
+          </C.DivMain>
+          <C.DivMain>
+            <C.PasswordWrapper>
+              <Input
+                type={visualizarSenha ? "text" : "password"}
+                placeholder="Digite sua Senha"
+                value={senha}
+                onChange={(e) => [setSenha(e.target.value), setError("")]}
+              />
+              <C.PasswordButton onClick={passwordVisibility}>
+                {visualizarSenha ? <FaEyeSlash /> : <FaEye />}
+              </C.PasswordButton>
+            </C.PasswordWrapper>
+          </C.DivMain>
+          <C.DivMain>
+            <C.PasswordWrapper>
+              <Input
+                type={visualizarSenha ? "text" : "password"}
+                placeholder="Confirme sua Senha"
+                value={senhaConf}
+                onChange={(e) => [setSenhaConf(e.target.value), setError("")]}
+              />
+              <C.PasswordButton onClick={passwordVisibility}>
+                {visualizarSenha ? <FaEyeSlash /> : <FaEye />}
+              </C.PasswordButton>
+            </C.PasswordWrapper>
+          </C.DivMain>
+          <C.DivMain>
+            <C.LabelError>{error}</C.LabelError>
+          </C.DivMain>
+          <C.DivMain>
+            <Button Text="Inscrever-se" onClick={handleSignup} />
+          </C.DivMain>
+          <C.DivMain>
+            <C.LabelSignin>
+              Já tem uma conta?
+              <C.Strong>
+                <Link to="/">&nbsp;Entre</Link>
+              </C.Strong>
+            </C.LabelSignin>
+          </C.DivMain>
+        </C.Content>
+      </C.MainContent>
+    </C.Container>
+  );
 };
+
+export default Signup;

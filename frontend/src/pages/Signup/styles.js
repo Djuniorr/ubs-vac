@@ -9,18 +9,31 @@ export const Container = styled.div`
   height: 100vh;
 `;
 
+export const MainContent = styled.div`
+  padding: 15px;
+    background: #FFF;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px;
+    border-radius: 4px;
+`;
+
 export const Content = styled.div`
   gap: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  box-shadow: 0 1px 2px #0003;
-  background-color: white;
-  max-width: 400px;
-  padding: 20px;
-  border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+`;
+
+export const DivMain = styled.div`
+  width: 300px;
+  text-align: center;
+
+  input{
+    width: 260px;
+  }  
 `;
 
 export const Label = styled.label`

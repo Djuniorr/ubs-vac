@@ -46,50 +46,66 @@ const Signup = () => {
   return (
     <C.Container>
       <C.LabelWelcome>FAÇA SEU CADASTRO</C.LabelWelcome>
-      <C.Content>
-        <Input
-          type="email"
-          placeholder="Digite seu E-mail"
-          value={email}
-          onChange={(e) => [setEmail(e.target.value), setError("")]}
-        />
-        <Input
-          type="email"
-          placeholder="Confirme seu E-mail"
-          value={emailConf}
-          onChange={(e) => [setEmailConf(e.target.value), setError("")]}
-        />
-        <C.PasswordWrapper>
-          <Input
-            type={visualizarSenha ? "text" : "password"}
-            placeholder="Digite sua Senha"
-            value={senha}
-            onChange={(e) => [setSenha(e.target.value), setError("")]}
-          />
-          <C.PasswordButton onClick={passwordVisibility}>
-            {visualizarSenha ? <FaEyeSlash /> : <FaEye />}
-          </C.PasswordButton>
-        </C.PasswordWrapper>
-        <C.PasswordWrapper>
-          <Input
-            type={visualizarSenha ? "text" : "password"}
-            placeholder="Confirme sua Senha"
-            value={senhaConf}
-            onChange={(e) => [setSenhaConf(e.target.value), setError("")]}
-          />
-          <C.PasswordButton onClick={passwordVisibility}>
-            {visualizarSenha ? <FaEyeSlash /> : <FaEye />}
-          </C.PasswordButton>
-        </C.PasswordWrapper>
-        <C.LabelError>{error}</C.LabelError>
-        <Button Text="Inscrever-se" onClick={handleSignup} />
-        <C.LabelSignin>
-          Já tem uma conta?
-          <C.Strong>
-            <Link to="/">&nbsp;Entre</Link>
-          </C.Strong>
-        </C.LabelSignin>
-      </C.Content>
+      <C.MainContent>
+        <C.Content>
+          <C.DivMain>
+            <Input
+              type="email"
+              placeholder="Digite seu E-mail"
+              value={email}
+              onChange={(e) => [setEmail(e.target.value), setError("")]}
+            />
+          </C.DivMain>
+          <C.DivMain>
+            <Input
+              type="email"
+              placeholder="Confirme seu E-mail"
+              value={emailConf}
+              onChange={(e) => [setEmailConf(e.target.value), setError("")]}
+            />
+          </C.DivMain>
+          <C.DivMain>
+            <C.PasswordWrapper>
+              <Input
+                type={visualizarSenha ? "text" : "password"}
+                placeholder="Digite sua Senha"
+                value={senha}
+                onChange={(e) => [setSenha(e.target.value), setError("")]}
+              />
+              <C.PasswordButton onClick={passwordVisibility}>
+                {visualizarSenha ? <FaEyeSlash /> : <FaEye />}
+              </C.PasswordButton>
+            </C.PasswordWrapper>
+          </C.DivMain>
+          <C.DivMain>
+            <C.PasswordWrapper>
+              <Input
+                type={visualizarSenha ? "text" : "password"}
+                placeholder="Confirme sua Senha"
+                value={senhaConf}
+                onChange={(e) => [setSenhaConf(e.target.value), setError("")]}
+              />
+              <C.PasswordButton onClick={passwordVisibility}>
+                {visualizarSenha ? <FaEyeSlash /> : <FaEye />}
+              </C.PasswordButton>
+            </C.PasswordWrapper>
+          </C.DivMain>
+          <C.DivMain>
+            <C.LabelError>{error}</C.LabelError>
+          </C.DivMain>
+          <C.DivMain>
+            <Button Text="Inscrever-se" onClick={handleSignup} />
+          </C.DivMain>
+          <C.DivMain>
+            <C.LabelSignin>
+              Já tem uma conta?
+              <C.Strong>
+                <Link to="/">&nbsp;Entre</Link>
+              </C.Strong>
+            </C.LabelSignin>
+          </C.DivMain>
+        </C.Content>
+      </C.MainContent>
     </C.Container>
   );
 };
