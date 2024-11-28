@@ -1,4 +1,7 @@
 import { db, ubs_db } from "../db.js";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from 'url';
 
 export const validateLogin = (req, res) => {
     const { email, password } = req.body;
@@ -70,4 +73,43 @@ export const getUbsWithVacinas = (req, res) => {
         }
         return res.status(200).json(result);
     });
+};
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Agora você pode usar __dirname normalmente
+const feedbackFilePath = path.join(__dirname, "../feedbacks.json");
+
+const readFeedbackFile = () => {
+  if (!fs.existsSync(feedbackFilePath)) {
+    return [];
+  }
+  const data = fs.readFileSync(feedbackFilePath, "utf8");
+  return JSON.parse(data || "[]");
+};
+
+const writeFeedbackFile = (feedbacks) => {
+  fs.writeFileSync(feedbackFilePath, JSON.stringify(feedbacks, null, 2), "utf8");
+};
+
+export const createFeedback = (req, res) => {
+  const { comment } = req.body;
+
+  if (!comment || typeof comment !== "string") {
+    return res.status(400).json({ error: "Comentário inválido." });
+  }
+
+  const feedbacks = readFeedbackFile();
+  const newFeedback = { id: Date.now(), comment, timestamp: new Date().toISOString() };
+
+  feedbacks.push(newFeedback);
+  writeFeedbackFile(feedbacks);
+
+  return res.status(201).json(newFeedback);
+};
+
+export const getFeedbacks = (req, res) => {
+  const feedbacks = readFeedbackFile();
+  return res.status(200).json(feedbacks);
 };
