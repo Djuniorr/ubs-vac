@@ -64,20 +64,25 @@ export const AuthProvider = ({ children }) => {
 
     const getUbs = useCallback(async () => {
         try {
+            console.log("Buscando dados das UBS...");
             const response = await axios.get("http://localhost:8800/ubs");
-
-        const decoder = new TextDecoder('utf-8');
-        const decodedData = decoder.decode(response.data);
-        
-        const parsedData = JSON.parse(decodedData);
-
-        setUbsList(parsedData);
+            
+            console.log("Resposta recebida:", response);
+            
+            // Assumindo que response.data já seja um array de UBS
+            const parsedData = response.data;
+            console.log("Dados das UBS recebidos:", parsedData);    
+            setUbsList(parsedData);
         } catch (error) {
             if (error.response) {
+                console.error("Erro na resposta da API:", error.response);
                 return "Erro ao buscar lista de UBSs";
+            } else {
+                console.error("Erro na requisição:", error);
             }
         }
     }, []);
+    
 
     const getUbsWithVacinas = useCallback(async () => {
         try {
