@@ -16,7 +16,6 @@ const Vacinas = () => {
   useEffect(() => {
     const fetchData = async () => {
       await getUbsWithVacinas();
-      console.log("Vacinas List:", vacinasList);
       setVacinasData(vacinasList);
     };
     fetchData();

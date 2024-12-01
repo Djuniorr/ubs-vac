@@ -19,8 +19,8 @@ const Ubs = () => {
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(lat1 * (Math.PI / 180)) *
-        Math.cos(lat2 * (Math.PI / 180)) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      Math.cos(lat2 * (Math.PI / 180)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   };
@@ -29,33 +29,28 @@ const Ubs = () => {
   const clearInput = () => setNome('');
 
   // Verifica se a localização do usuário está carregada
-  const isLocationAvailable = userLocation && userLocation.latitude && userLocation.longitude;
+  const isLocationAvailable = userLocation && userLocation.latitude.longitude && userLocation.latitude.latitude;
 
   useEffect(() => {
     getUbs();
-    console.log("ubsList:", ubsList);
   }, [getUbs]);
 
-  
-
-  // Filtra a lista de UBSs pelo nome
   const filteredList = ubsList.filter((ubs) => ubs.nome.toLowerCase().includes(nome.toLowerCase()));
 
-  // Ordena a lista de UBSs pela distância mais próxima
   const sortedUbs = filteredList
     .map((ubs) => {
       if (isLocationAvailable) {
-        const lat1 = userLocation.latitude;
-        const lon1 = userLocation.longitude;
+        const lat1 = userLocation.latitude.latitude;
+        const lon1 = userLocation.latitude.longitude;
         const lat2 = parseFloat(ubs.latitude.trim());
         const lon2 = parseFloat(ubs.longitude.trim());
         const distance = calculateDistance(lat1, lon1, lat2, lon2);
         return { ...ubs, distance };
       } else {
-        return { ...ubs, distance: Infinity }; // Se a localização não estiver disponível, coloca uma distância infinita
+        return { ...ubs, distance: Infinity };
       }
     })
-    .sort((a, b) => a.distance - b.distance); // Ordena pela distância
+    .sort((a, b) => a.distance - b.distance); 
 
   return (
     <C.Container>
